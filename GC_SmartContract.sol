@@ -1,4 +1,5 @@
 pragma solidity >=0.4.22 <0.7.0;
+pragma experimental ABIEncoderV2;
 
 /**
  * @title Storage
@@ -7,13 +8,13 @@ pragma solidity >=0.4.22 <0.7.0;
 contract GCSmartContract {
 
     uint256 balance;
-    bytes32 code;
-    bytes32[] transactions;
+    string code;
+    string[] transactions;
    
     /**
      * constructor to issue a new Gift Card
      */
-      constructor(uint256 _balance, bytes32 _code) public {
+      constructor(uint256 _balance,string memory _code) public {
       balance = _balance;
       code=_code;
    }
@@ -21,9 +22,10 @@ contract GCSmartContract {
      /**
      * function to redeem Gift Card with amount and transaction date
      */
-    function redeeem(uint256 amount,bytes32 date) public {
+    function redeeem(uint256 amount,string memory description) public {
+        assert(balance >= amount); //throw error if the balance is not endough
         balance=balance-amount;
-        transactions.push(date);
+        transactions.push(description);
         
         
     }
@@ -31,7 +33,15 @@ contract GCSmartContract {
      /**
      * function to return current balance on the Gift Card
      */
-    function balance() public view returns (uint256){
+    function getBalance() public view returns (uint256){
         return balance;
     }
+    
+     /**
+     * function to return current balance on the Gift Card
+     */
+    function gettransactions() public view returns (string[] memory){
+        return transactions;
+    }
+    
 }
