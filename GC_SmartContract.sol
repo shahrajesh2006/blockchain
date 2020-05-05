@@ -2,10 +2,10 @@ pragma solidity >=0.4.22 <0.7.0;
 pragma experimental ABIEncoderV2;
 
 /**
- * @title Storage
- * @dev Store & retreive value in a variable
+ *  Smart Contract for Gift Card Issued By GC Inc
+ * 
  */
-contract GCSmartContract {
+contract GCIncGiftCardContract {
 
     uint256 balance;
     string code;
@@ -20,7 +20,7 @@ contract GCSmartContract {
    }
    
      /**
-     * function to redeem Gift Card with amount and transaction date
+     * function to redeem Gift Card with amount and  record transactions
      */
     function redeeem(uint256 amount,string memory description) public {
         assert(balance >= amount); //throw error if the balance is not endough
@@ -38,7 +38,7 @@ contract GCSmartContract {
     }
     
      /**
-     * function to return current balance on the Gift Card
+     * function to return current transactions on the Gift Card
      */
     function gettransactions() public view returns (string[] memory){
         return transactions;
